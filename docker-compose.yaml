@@ -3,8 +3,8 @@ version: '3.8'
 services:
   server:
     build:
-      context: .
-      dockerfile: dockerfile.server
+      context: ../server
+      dockerfile: ../dokcer/Dockerfile.server
     ports:
       - "3000:3000"
     depends_on:
