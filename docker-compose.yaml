@@ -1,14 +1,21 @@
-version: '3.8'
+version: "3.8"
 
 services:
   server:
     build:
       context: ../server
-      dockerfile: ../dokcer/Dockerfile.server
+      dockerfile: ../docker/Dockerfile.server
     ports:
       - "3000:3000"
     depends_on:
       - mongodb
+  clientv1:
+    build:
+      context: ../clientv1
+      dockerfile: ../docker/Dockerfile.client
+    ports:
+      - "2173:5173"
+    command: -tail -f /dev/null
   mongodb:
     image: mongo
     restart: always
