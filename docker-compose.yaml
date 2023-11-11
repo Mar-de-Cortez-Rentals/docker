@@ -7,23 +7,36 @@ services:
       dockerfile: ../docker/Dockerfile.server
     ports:
       - "3000:3000"
+    volumes:
+      - ../server:/app
     depends_on:
       - mongodb
+    networks:
+      - backend
   clientv1:
     build:
       context: ../clientv1
       dockerfile: ../docker/Dockerfile.client
     ports:
       - "2173:5173"
-    command: -tail -f /dev/null
+    volumes:
+      - ../clientv1:/app
   mongodb:
     image: mongo
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
 
 volumes:
   mongodb_data:
