@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 services:
   server:
@@ -6,7 +6,7 @@ services:
       context: ../server
       dockerfile: ../docker/Dockerfile.server
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
       - ../server:/app
     depends_on:
@@ -18,7 +18,7 @@ services:
       context: ../clientv1
       dockerfile: ../docker/Dockerfile.client
     ports:
-      - "2173:5173"
+      - '2173:5173'
     volumes:
       - ../clientv1:/app
   mongodb:
@@ -28,7 +28,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     ports:
-      - "27017:27017"
+      - '27017:27017'
     volumes:
       - mongodb_data:/data/db
     networks:
